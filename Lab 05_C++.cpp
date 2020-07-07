@@ -1,7 +1,4 @@
-// Lab 05_C++.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-// Author: Justin Ezell
-// Date: 06/29/2020
+
 #include <iostream>
 #include <iomanip>
 #include <string>
