@@ -1,4 +1,4 @@
-// Lab 06 C++.cpp : Justin Ezell
+
 // This program computes the distance of an object falling based off of how much time has passed.
 
 #include <iostream>
