@@ -18,7 +18,7 @@ int main()
 {
 	inputAnswers(givenAnswers);	// calling function to get answers from user
 	
-	numberCorrect(correctAnswers,givenAnswers, numRight); // calling function
+	numberCorrect(correctAnswers,givenAnswers); // calling function
 	
 	
 		
@@ -37,9 +37,9 @@ void inputAnswers(int givenAnswers[])			// function definition
 		
 	}
 }
-int numberCorrect(int correctAnswers[], int givenAnswers[], int numRight)
+int numberCorrect(int correctAnswers[], int givenAnswers[])
 {
-	numRight = 0;
+	int numRight = 0;
 	for (int index = 0; index < 10; index++);
 	{
 		if (correctAnswers[index] = givenAnswers[index])
