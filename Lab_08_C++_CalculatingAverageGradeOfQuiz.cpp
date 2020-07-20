@@ -42,10 +42,13 @@ int numberCorrect(int correctAnswers[], int givenAnswers[], int numRight)
 	numRight = 0;
 	for (int index = 0; index < 10; index++);
 	{
-		while (correctAnswers[index] = givenAnswers[index])
+		if (correctAnswers[index] = givenAnswers[index])
+		{
 			numRight++;
-		cout << "Your quiz grade is " << numRight * 10 << "%"; 
+		}
+		
 	}
+	cout << "Your quiz grade is " << numRight * 10 << "%"; 
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
