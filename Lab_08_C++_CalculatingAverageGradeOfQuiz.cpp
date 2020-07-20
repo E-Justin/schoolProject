@@ -18,7 +18,7 @@ int main()
 {
 	inputAnswers(givenAnswers);	// calling function to get answers from user
 	
-	numberCorrect(correctAnswers[],givenAnswers, numRight); // calling function
+	numberCorrect(correctAnswers,givenAnswers, numRight); // calling function
 	
 	
 		
