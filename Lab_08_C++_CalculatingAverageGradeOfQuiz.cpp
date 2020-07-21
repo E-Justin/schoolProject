@@ -30,7 +30,7 @@ int numberCorrect(int correctAnswers[], int givenAnswers[]) // function definiti
 	int numRight = 0;	// initialize numRight to 0
 	for (int index = 0; index < 10; index++);	// initialize loop to cycle through both arrays
 	{
-		if (correctAnswers[index] = givenAnswers[index])	// compares givenAnswers to correct answers
+		if (correctAnswers[index] == givenAnswers[index])	// compares givenAnswers to correct answers
 		{
 			numRight++;										// if answers are the same, the program adds 1 to numRight
 		}
