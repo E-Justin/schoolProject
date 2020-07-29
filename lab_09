@@ -1,0 +1,57 @@
+// This program should display the phone number entered into the correct format (000) 000-0000. Also display an error message if there were less than 10 digits entered, and 
+// only accept the first 10 digits if the user enters in more than 10.
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <string>
+#include <cctype>
+using namespace std;
+
+
+
+int main()
+{
+    string input;       // declaring string variable to store string
+
+    cout << " Please enter a ten digit phone number" << endl;       // prompts user to input phone number
+    getline(cin, input);      // gets the full line of input (cin has limitations when user enters a space)
+    const int SIZE = 15;
+    char outputFormat[SIZE] = { '(', '0', '0', '0', ')', ' ', '0', '0', '0', '-', '0', '0', '0', '0', '\0' };    // correct format
+    int copyPosition = 0;   // keeps track of the position to write the digit in the outputFormat array
+    int digitCount = 0; // keeps track of the number of input digits that have been counted to make sure we have 10
+    int length = input.length();         // holds the length of the user input string
+
+    for (int index = 0; index <= length; index++)   // iterates through input string
+    {
+        char c = input[index]; // stores the character at the current position in the loop
+
+        if (isdigit(c))       // test the elements in the inpput string to see if it is a digit
+        {
+            while (outputFormat[copyPosition] != '0')   // moves the position of the outputFormat to the nex '0'
+            {
+                copyPosition++;         // increment counter to move to the next position in the outputFormat array.
+            }
+            outputFormat[copyPosition] = c;     // copies the digit into the correct position in the correct format.
+
+            digitCount++;   //increment counter
+            if (digitCount > 10)
+            {
+                break;
+            }
+        }
+        
+    }
+
+    if (digitCount < 10)
+    {
+        cout << "*ERROR*" << endl;
+        cout << " The phone number must have at least 10 digits" << endl;   // error message if there are not enough digits.
+       
+    }
+    
+    else
+    {
+        cout << "The phone number in the correct format is " << outputFormat << endl; // if the user entered 10 of more digits, the phone number will display in the correct format.
+    }
+    return 0;
+}
