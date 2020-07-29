@@ -21,7 +21,7 @@ int main()
     int digitCount = 0; // keeps track of the number of input digits that have been counted to make sure we have 10
     int length = input.length();         // holds the length of the user input string
 
-    for (int index = 0; index <= length; index++)   // iterates through input string
+    for (int index = 0; index < length; index++)   // iterates through input string
     {
         char c = input[index]; // stores the character at the current position in the loop
 
@@ -34,6 +34,7 @@ int main()
             outputFormat[copyPosition] = c;     // copies the digit into the correct position in the correct format.
 
             digitCount++;   //increment counter
+            copyPosition++; // increment counter
             if (digitCount > 10)
             {
                 break;
