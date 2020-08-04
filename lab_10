@@ -41,16 +41,24 @@ int main()
         
     }
     int length = copy.length();                     // gets the length of the data copied from the plain text file.
+
     for (int index = 0; index < length; index++)    // loops through each character until index is greater than length
     {
-        coded = copy[index] + 6;            // encrypts code to add 6 to each character
+        coded += copy[index] + 4;            // encrypts code to add 4 to each character
+
+        if (copy[index] == '\n')            // skips over '\n's to keep the formatting
+        {
+            coded += copy[index];       // keeps the '\n' to keep formatting correct
+        }
     }
+
     ofstream outputFile;                
     outputFile.open("coded.txt");   // opens file for writing
 
-    outputFile <<" The encrypted file contains: " << endl << coded;
+    outputFile <<" The encrypted file contains: " << endl << coded; // supposed to display the coded file in coded.txt
 
     outputFile.close(); // closes file
 
+    system("pause");
     return 0;
 }
