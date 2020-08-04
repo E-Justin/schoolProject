@@ -48,7 +48,7 @@ int main()
     ofstream outputFile;                
     outputFile.open("coded.txt");   // opens file for writing
 
-    cout <<" The encrypted file contains: " << endl << coded;
+    outputFile <<" The encrypted file contains: " << endl << coded;
 
     outputFile.close(); // closes file
 
