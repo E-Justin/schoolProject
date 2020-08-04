@@ -1,0 +1,8 @@
+This is a sample input file for COSC 1436
+assignment #10. Your program should encode this
+file by adding four to the AsCII value of each 
+character in it. In your encoded file the first character should 
+be 'X'. The last character of the first line should be ':'.
+The encoded file should have 8 lines of text just like this one,
+but will be unreadable. The last character of the last line will 
+be a '2'.
