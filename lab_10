@@ -1,0 +1,53 @@
+// This program should read and display contents of a file, one line at a time.
+// it should then convert each line to its ASCII value + 6 and display it in the same format as the original code (one line at a time)
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+using namespace std;
+
+int main()
+{
+    string contents;                    // string to hold contents of file
+    string copy;                        // string to copy the entire file to, one line at a time
+
+    ifstream inputFile;
+    inputFile.open("plain.txt");        // opens file for reading
+
+
+    if (inputFile)      // Assuming file is opened correctly, loop continues
+    {
+        
+
+        getline(inputFile, contents, '\n');     
+        cout << contents << endl;               // for some reason, I had to start with this in order for it to copy the first word from the file
+        
+        copy = contents;                        // transfers to another variable to hold the entire file's contents
+
+        while (inputFile >> contents)       // loop to read from file until it reaches the end
+        {
+           
+
+            getline(inputFile, contents, '\n');
+            cout << contents << endl;               // gets the next line, and so on
+
+            copy += contents;                // copies each line to the copy variable until it holds the entire file.
+        }
+        cout <<"The copy variable holds: " << copy; // displays the contents of the copy variable
+        
+    }
+    
+
+
+}
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+// Debug program: F5 or Debug > Start Debugging menu
+
+// Tips for Getting Started: 
+//   1. Use the Solution Explorer window to add/manage files
+//   2. Use the Team Explorer window to connect to source control
+//   3. Use the Output window to see build output and other messages
+//   4. Use the Error List window to view errors
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
