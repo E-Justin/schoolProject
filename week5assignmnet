@@ -1,0 +1,76 @@
+/*
+COSC-1420: "C" Programming
+Week 4 Assignment
+September 18, 2020
+*/
+
+#include <stdio.h>
+
+int main(void)
+{
+	int num;
+	int copyNum;
+	int totalDigits = 0;
+	
+	
+
+
+	printf ("Enter a number \n");
+	scanf_s("%i", &num);
+	
+	copyNum = num;
+
+	while (num != 0) // calcualte the total number of digits entered
+	{
+		num /= 10;     // num = num / 10
+		++totalDigits;
+	}
+
+	
+	
+	for (int i = totalDigits - 1; i >= 0; --i)
+	{
+		int p = (int)pow(10, i);
+		int currentDigit = copyNum / p;
+
+		switch (currentDigit)
+		{
+		case 0:
+			printf("zero ");
+			break;
+		case 1:
+			printf("one ");
+			break;
+		case 2:
+			printf("two");
+			break;
+		case 3:
+			printf("three ");
+			break;
+		case 4:
+			printf("four ");
+			break;
+		case 5:
+			printf("five ");
+			break;
+		case 6:
+			printf("six ");
+			break;
+		case 7:
+			printf("seven ");
+			break;
+		case 8:
+			printf("eight");
+			break;
+		case 9:
+			printf("nine ");
+			break;
+		default:
+			printf("ERROR!");
+			break;
+		}
+	}
+	
+
+	return 0;
+}
