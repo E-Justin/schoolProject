@@ -31,7 +31,7 @@ int main(void)
 		for (int i = totalDigits - 1; i >= 0; --i)
 		{
 			
-			int currentDigit = copyNum / (int)pow(1,i);
+			int currentDigit = copyNum / (int)pow(10,i);
 
 
 			switch (currentDigit)
