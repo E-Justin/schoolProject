@@ -6,6 +6,8 @@ September 18, 2020
 
 #include <stdio.h>
 
+#include <stdio.h>
+
 int main(void)
 {
 	int num;
@@ -25,11 +27,12 @@ int main(void)
 		num /= 10;     // num = num / 10
 		++totalDigits;
 
-
+	}
 		for (int i = totalDigits - 1; i >= 0; --i)
 		{
-			int p = (int)pow(10, i);
-			int currentDigit = copyNum / p;
+			
+			int currentDigit = copyNum / (int)pow(1,i);
+
 
 			switch (currentDigit)
 			{
@@ -68,7 +71,7 @@ int main(void)
 				break;
 			}
 		}
-	}
+	
 
 	return 0;
 }
