@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <windows.management.update.h>
+
+
+
+
+struct dateAndTime
+{
+	int day;
+	int month;
+	int year;
+	int hour;
+	int minutes;
+	int seconds;
+};
+
+const int daysPerMonth[12] = { 31, 28, 31, 30, 31, 30,	// number of days in each month
+						31, 31, 30, 31, 30, 31 };
+
+struct dateAndTime currentTime, nextTime;
+
+
+
+
+
+struct dateAndTime timeUpdate(struct dateAndTime now)		// function to update time by one second
+{
+	++now.seconds;
+
+	if (now.seconds == 60)	// next minute
+	{
+		now.seconds = 0;
+		++now.minutes;
+
+		if (now.minutes == 60)	// next hour
+		{
+			now.minutes = 0;
+			++now.hour;
+
+			if (now.hour == 24)	// midnight
+			{
+				now.hour = 0;
+				++now.day;
+				
+			}
+		}
+	}
+	return now;
+}
+
+struct dateAndTime dateUpdate(struct dateAndTime now)
+{
+	if (now.day > daysPerMonth[now.month - 1]) // end of month
+	{
+		now.day = 1;
+		++now.month;
+	}
+	if (now.month == 13)
+	{
+		now.month = 1;
+		++now.year;
+	}
+
+	return now;
+}
+
+
+int main(void)
+{
+	printf("Enter the time in military time (hh:mm:ss): \n");
+	scanf_s("%i:%i:%i", &currentTime.hour, &currentTime.minutes,
+		&currentTime.seconds);
+
+	printf("Enter today's date (mm dd yyyy): \n");
+	scanf_s("%i%i%i", &currentTime.month, &currentTime.day, &currentTime.year);
+
+	struct dateAndTime timeUpdate(struct dateAndTime now);
+	struct dateAndTime dateUpdate(struct dateAndTime now);
+
+	nextTime = timeUpdate(currentTime);
+
+	printf("***One second from the time you put in is***\n");
+	printf("Date: %i/%i/%.2i\n", nextTime.month, nextTime.day, nextTime.year);
+	printf("Time: %i:%i:%i\n", nextTime.hour, nextTime.minutes, nextTime.seconds);
+	
+	
+	return 0;
+
+}
