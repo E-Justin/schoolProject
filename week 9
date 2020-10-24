@@ -33,10 +33,18 @@ struct nextTime dateUpdate(struct currentTime)			// still working on this, but i
 
 	if (currentTime.day != numberOfDays(currentTime.day))
 	{
-		nextTime =
+		nextTime = (struct dateAndTime){ currentTime.month, currentTime.day + 1, currentTime.year };
+	}
+	else if (currentTime.month == 12)	// end of year
+	{
+		nextTime = (struct dateAndTime){ 1, 1, currentTime.year + 1 };
+	}
+	else            // end of month
+	{
+		nextTime = (struct dateAndTime){ currentTime.month + 1, 1, currentTime.year };
 	}
 
-		return;
+		return nextTime;
 }
 
 
