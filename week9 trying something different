@@ -49,17 +49,40 @@ struct dateAndTime timeUpdate(struct dateAndTime now)		// function to update tim
 	return now;
 }
 
+bool isLeapYear(struct dateAndTime d)	// function to determine if it is a leap year
+{
+	bool leapYearFlag;
+
+	if ((d.year % 4 == 0 && d.year % 100 != 0) || d.year % 400 == 0)
+
+		leapYearFlag = true;	// it is a leap year
+	else
+		leapYearFlag = false;	// not a leap year
+
+	return leapYearFlag;
+}
+
+int numberOfDays(struct dateAndTime d)	// function to find the number of days in a month
+{
+	int days;
+	bool isLeapYear(struct dateAndTime d);
+	const int daysPerMonth[12] = { 31, 28, 31, 30, 31, 30,	// number of days in each month
+						31, 31, 30, 31, 30, 31 };
+
+	if (isLeapYear(d) == true && d.month == 2)
+		days = 29;
+	else
+		days = daysPerMonth[d.month - 1];
+
+	return days;
+}
+
 struct dateAndTime dateUpdate(struct dateAndTime now)
 {
-	if (now.day > daysPerMonth[now.month - 1]) // end of month
+	if (currentTime.day > days)
 	{
 		now.day = 1;
 		++now.month;
-	}
-	if (now.month == 13)
-	{
-		now.month = 1;
-		++now.year;
 	}
 
 	return now;
