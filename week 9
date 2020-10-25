@@ -6,13 +6,6 @@ to the next day. Have the function return the updated dateAndTime structure.
 
 #include <stdio.h>
 #include <stdbool.h>
-#include <windows.management.update.h>
-
-
-
-
-#include <stdio.h>
-#include <stdbool.h>
 
 struct date
 {
@@ -28,6 +21,13 @@ struct time
 	int seconds;
 };
 
+struct dateAndTime
+{
+	struct date sdate;
+	struct time stime;
+};
+
+struct date thisDay, nextDay;
 struct date today, tomorrow;
 
 const int daysPerMonth[12] =
@@ -105,12 +105,33 @@ struct time timeUpdate(struct time now)	// function to update the time by one se
 			++now.hour;
 
 			if (now.hour == 24)		// midnight
+			{
 				now.hour = 0;
+			}
 		}
 	}
+	
 
 	return now;
 }
+
+struct dateAndTime clockKeeper(struct dateAndTime d)
+{
+	struct dateAndTime updatedDateAndTime;
+	
+	updatedDateAndTime.stime = timeUpdate(d.stime);
+
+	if ((updatedDateAndTime.stime.hour == 0) && (updatedDateAndTime.stime.minutes == 0)
+		&& (updatedDateAndTime.stime.seconds == 0))
+	{
+		updatedDateAndTime.sdate = dateUpdate(updatedDateAndTime.sdate);
+	}
+	
+	
+
+	return updatedDateAndTime;
+}
+
 
 int main(void)
 {
@@ -121,21 +142,22 @@ int main(void)
 	struct time currentTime, nextTime;
 
 	printf("Enter today's date (mm dd yyyy): ");
-	scanf_s("%i%i%i", &thisDay.month, &thisDay.day, &thisDay.year);
+	scanf_s("%d%d%d", &thisDay.month, &thisDay.day, &thisDay.year);
 
 	printf("Enter the time (hh:mm:ss) : ");
-	scanf_s("%i:%i:%i", &currentTime.hour, &currentTime.minutes, &currentTime.seconds);
+	scanf_s("%d:%d:%d", &currentTime.hour, &currentTime.minutes, &currentTime.seconds);
+
 
 	nextTime = timeUpdate(currentTime);
-
 	nextDay = dateUpdate(thisDay);
+	
 
 
 
 	printf("The updated time is %.2i:%.2i:%.2i\n", nextTime.hour, nextTime.minutes, nextTime.seconds);
 
 
-	printf("Tomorrow's date is %i/%i/%.2i.\n", nextDay.month, nextDay.day, nextDay.year % 100);
+	printf("The updated date is %i/%i/%.2i.\n", nextDay.month, nextDay.day, nextDay.year % 100);
 
 
 
