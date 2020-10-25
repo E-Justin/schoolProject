@@ -11,37 +11,85 @@ to the next day. Have the function return the updated dateAndTime structure.
 
 
 
-struct dateAndTime
+#include <stdio.h>
+#include <stdbool.h>
+
+struct date
 {
-	int day;
 	int month;
+	int day;
 	int year;
+};
+
+struct time
+{
 	int hour;
 	int minutes;
 	int seconds;
 };
 
-const int daysPerMonth[12] = { 31, 28, 31, 30, 31, 30,	// number of days in each month
-						31, 31, 30, 31, 30, 31 };
+struct date today, tomorrow;
 
-struct dateAndTime currentTime, nextTime;
+const int daysPerMonth[12] =
+{ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-struct nextTime dateUpdate(struct currentTime)			// still working on this, but it 
-														//is supposed to update the date if the time reaches midnight
+
+
+struct date dateUpdate(struct date today)	// function to switch date over to tomorrow
 {
-	int numberOfDays(struct currentTime);
+	struct date tomorrow;
+	int numberOfDays(struct date d);
 
-	if (currentTime.day != numberOfDays(currentTime.day))
+	if (today.day != numberOfDays(today))
 	{
-		nextTime =
+		tomorrow.day = today.day + 1;
+		tomorrow.month = today.month;
+		tomorrow.year = today.year;
+	}
+	else if (today.month == 12)
+	{
+		tomorrow.day = 1;
+		tomorrow.month = 1;
+		tomorrow.year = today.year + 1;
+	}
+	else
+	{
+		tomorrow.day = 1;
+		tomorrow.month = today.month + 1;
+		tomorrow.year = today.year;
 	}
 
-		return;
+	return tomorrow;
 }
 
+int numberOfDays(struct date d)	// function to determine the number of days in a month
+{
+	int days;
+	bool isLeapYear(struct date d);
+	const int daysPerMonth[12] =
+	{ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
+	if (isLeapYear(d) && d.month == 2)
+		days = 29;
+	else
+		days = daysPerMonth[d.month - 1];
 
-struct dateAndTime timeUpdate(struct dateAndTime now)		// function to update time by one second
+	return days;
+
+}
+
+bool isLeapYear(struct date d)		// function to determine if it is a leap year
+{
+	bool leapYearFlag;
+
+	if ((d.year % 4 == 0 && d.year % 100 != 0) || d.year % 400 == 0)
+		leapYearFlag = true;	// leap year
+	else
+		leapYearFlag = false;	// no leap year
+	return leapYearFlag;
+}
+
+struct time timeUpdate(struct time now)	// function to update the time by one second
 {
 	++now.seconds;
 
@@ -50,37 +98,46 @@ struct dateAndTime timeUpdate(struct dateAndTime now)		// function to update tim
 		now.seconds = 0;
 		++now.minutes;
 
+
 		if (now.minutes == 60)	// next hour
 		{
 			now.minutes = 0;
 			++now.hour;
 
-			if (now.hour == 24)	// midnight
+			if (now.hour == 24)		// midnight
 				now.hour = 0;
 		}
 	}
+
 	return now;
 }
 
-
 int main(void)
 {
-	printf("Enter the time in military time (hh:mm:ss): \n");
-	scanf_s("%i:%i:%i", &currentTime.hour, &currentTime.minutes,
-		&currentTime.seconds);
+	
+	struct date dateUpdate(struct date today);
+	struct date thisDay, nextDay;
+	struct time timeUpdate(struct time now);
+	struct time currentTime, nextTime;
 
-	printf("Enter today's date (mm dd yyyy): \n");
-	scanf_s("%i%i%i", &currentTime.month, &currentTime.day, &currentTime.year);
+	printf("Enter today's date (mm dd yyyy): ");
+	scanf_s("%i%i%i", &thisDay.month, &thisDay.day, &thisDay.year);
 
-	struct dateAndTime timeUpdate(struct dateAndTime now);
+	printf("Enter the time (hh:mm:ss) : ");
+	scanf_s("%i:%i:%i", &currentTime.hour, &currentTime.minutes, &currentTime.seconds);
 
 	nextTime = timeUpdate(currentTime);
 
-	printf("***One second from the time you put in is***\n");
-	printf("Date: %i/%i/%.2i\n", nextTime.month, nextTime.day, nextTime.year);
-	printf("Time: %i:%i:%i\n", nextTime.hour, nextTime.minutes, nextTime.seconds);
-	
-	
-	return 0;
+	nextDay = dateUpdate(thisDay);
 
+
+
+	printf("The updated time is %.2i:%.2i:%.2i\n", nextTime.hour, nextTime.minutes, nextTime.seconds);
+
+
+	printf("Tomorrow's date is %i/%i/%.2i.\n", nextDay.month, nextDay.day, nextDay.year % 100);
+
+
+
+	return 0;
 }
