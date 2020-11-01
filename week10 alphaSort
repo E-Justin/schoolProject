@@ -52,7 +52,7 @@ struct dictionary dictionarySort(struct dictionary temp[15])
 				temp[i] = dictionary[i];
 				dictionary[i] = dictionary[j];
 				dictionary[j] = temp[i];
-
+				++a
 			}
 
 
