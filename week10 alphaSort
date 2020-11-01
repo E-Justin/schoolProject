@@ -1,3 +1,6 @@
+#include<stdio.h>
+#include<stdbool.h>
+
 int entries = 10;
 
 struct entry
@@ -34,7 +37,7 @@ struct entry dictionary[100] =
 
 };
 
-struct dictionary dictionarySort(struct dictionary temp[15])
+void dictionarySort(struct entry temp[], int entries)
 {
 	int i, j;
 	int a = 0;
@@ -52,18 +55,15 @@ struct dictionary dictionarySort(struct dictionary temp[15])
 				temp[i] = dictionary[i];
 				dictionary[i] = dictionary[j];
 				dictionary[j] = temp[i];
-				++a
+				++a;
 			}
 
 
 		}
 	}
-	for (i = 0; i < entries; i++)
-	{
-		printf("%s\n", dictionary[i].word);
-	}
+	
 
-	return struct dictionary;
+	return temp;
 }
 
 
@@ -71,12 +71,15 @@ int main(void)
 {
 	
 	
-
+	void dictionarySort(struct entry temp[], int entries);
 	
 
 
 	
-	
+	for (int i = 0; i < entries; i++)
+	{
+		printf("%s\n", dictionary[i].word);
+	}
 	
 	
 
