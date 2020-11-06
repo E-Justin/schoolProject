@@ -1,7 +1,5 @@
 #include <stdio.h>
 
-#include <stdio.h>
-
 int num1, num2, num3;
 void sort3(int* p1, int* p2, int* p3);
 
