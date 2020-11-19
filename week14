@@ -4,6 +4,7 @@ Chapter 10, “Pointers, ” for the details on how to declare a variable
 of this type. */
 
 
+
 #include <stdio.h>
 
 int noArgs(void)
@@ -18,17 +19,12 @@ typedef int *functionPointer;
 int main(void)
 {
 	int z;
-	int x = 5;
-
-	int y = 7;
-	functionPointer p2 = &y;
+	
+	
 	int noArgs();
 	functionPointer (*p3)(void) = noArgs;
 
-	int* fP = &x;
 	
-	printf("x = %d\n", *fP);	
-	printf("y = %d\n", *p2);	
 	z = (*p3)();
 	printf("The function returns the integer %d\n", z);
 	
