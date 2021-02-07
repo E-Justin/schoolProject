@@ -1,0 +1,1 @@
+print("         \\|||/ \n         (o o)\n|~~~~oo0~~(_)~~~~~~~~|\n| Please             |\n| don't feed the     |\n| TROLLS !           |\n'~~~~~~~~~~~~0oo~~~~~'\n       |___|___|  \n        | | | |   \n        oo0 0oo")
