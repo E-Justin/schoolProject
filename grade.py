@@ -10,16 +10,17 @@ XX should be the average of all grades entered within range. """
 count = 1
 addEmUp = 0
 userInput = 0
-A = 'Great Job! You earned an A'
-B = 'Good Job. You earned a B'
-C = "C's get degrees: You earned a C"
-D = 'No bueno. You earned a D'
-F = "You're a failure: You earned an F"
+A = 'A'
+B = 'B'
+C = "C"
+D = 'D'
+F = "F"
 
 while userInput != 666:
     userInput = int(input("Please enter a numeric grade between 0 and 100 or press 666 to quit"))
     if userInput == 666:
-        print("Thank youThe average of all entered grades, excluding errors was: XX")
+        print("Thank you. The average of all entered grades, excluding errors was: ")
+        break
     if userInput > 100:
         print("Too high. Must be between 0 and 100")
     elif userInput < 0:
