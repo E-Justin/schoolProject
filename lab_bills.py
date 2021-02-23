@@ -1,8 +1,8 @@
 user1Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
 user2Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
 
-user1Total = float
-user2Total = float
+user1Total = float()
+user2Total = float()
 
 index = 0
 count = 0
@@ -21,4 +21,4 @@ while count < index:
     user1Total = user1Total + float(user1Input[count])
     count = count + 1
 
-print("User1Total =", user1Total)
+print("User1Total =", round(user1Total))
