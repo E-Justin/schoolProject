@@ -13,21 +13,30 @@ temp2 = 0.0
 bill = 0
 
 
-while bill != 123456:
-    bill = float(input("Enter a bill amount that person1 paid, or press 123456 to move on to Kristen's stuff"))
-    person1 += bill
-    print("Person1's current bills total for the month:", round(person1,2))
-    if bill == 123456:
+while bill != 123:
+    if bill == 123:
         break
+    elif bill != 123:
+            bill = float(input("Enter a bill amount that person1 paid, or press 123 to move on to Kristen's stuff"))
+            person1 += bill
+            print("Person1's current bills total for the month:", round(person1,2))
+    
 
 print("Person1's total for bills this month is: $", round(person1,2))
     
 
-while bill != 9876:
-    bill = float(input("Enter a bill amount that person2 paid, or press 9876 to "))
-    person2 += bill
-    print("Person2's current bills total for the month:", round(person2, 2))
-    if bill == 9876:
+while bill != 456:
+    if bill == 456:
         break
+    elif bill != 456:
+        bill = float(input("Enter a bill amount that person2 paid, or press 456 to move to find out who owes who what "))
+        person2 += bill
+        print("Person2's current bills total for the month:", round(person2, 2))
+    
 
 print("Person2's total for bills this month is: $", round(person2, 2))
+
+    
+    
+
+
