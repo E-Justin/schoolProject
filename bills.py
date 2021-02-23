@@ -17,7 +17,7 @@ while bill != 123:
     if bill == 123:
         break
     elif bill != 123:
-            bill = float(input("Enter a bill amount that person1 paid, or press 123 to move on to Kristen's stuff"))
+            bill = float(input("Enter a bill amount that person1 paid, or press 123 to move on to user2's stuff"))
             person1 += bill
             print("Person1's current bills total for the month:", round(person1,2))
     
