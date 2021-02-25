@@ -11,16 +11,17 @@ index2 = 0
 count2 = 0
 
 user1Name = str(input("What is user1's name?"))
+user2Name = str(input("What is user2's name?"))
 
 
 selection = str(input("Would you like to enter bills paid by " + user1Name + "? y/n")) 
 
 while selection != 'n': # while selection is not n
-    user1Input[index] = str(input("Enter a bill amount that user1 paid this month")) # stores user input in an array, starting at 0
-    selection = str(input("Would you like to enter more bills paid by user1? y/n")) # continue bills for user1 or no
+    user1Input[index] = str(input("Enter a bill amount that " + user1Name + " paid this month")) # stores user input in an array, starting at 0
+    selection = str(input("Would you like to enter more bills paid by " + user1Name + "? y/n")) # continue bills for user1 or no
     index = index +1 #increases index to move to the next position in the array.
 
-print("User1 paid the following amounts:")
+print(user1Name + " paid the following amounts:")
 while count < index: # displays each amount entered for user1
     print(user1Input[count])
     user1Total = user1Total + float(user1Input[count]) # adds up each element of the array to get the total amount bills paid for user1
