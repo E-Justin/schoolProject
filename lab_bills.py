@@ -10,8 +10,10 @@ count = 0
 index2 = 0
 count2 = 0
 
+user1Name = str(input("What is user1's name?"))
 
-selection = str(input("Would you like to enter bills paid by user1? y/n")) 
+
+selection = str(input("Would you like to enter bills paid by " + user1Name + "? y/n")) 
 
 while selection != 'n': # while selection is not n
     user1Input[index] = str(input("Enter a bill amount that user1 paid this month")) # stores user input in an array, starting at 0
@@ -24,7 +26,7 @@ while count < index: # displays each amount entered for user1
     user1Total = user1Total + float(user1Input[count]) # adds up each element of the array to get the total amount bills paid for user1
     count = count + 1 # increases count to move to the next position in the array
 
-print("User1Total =$", round(user1Total)) # displays user1's total
+print("User1Total =$", round(user1Total,2)) # displays user1's total
 
 
 
@@ -56,3 +58,4 @@ if user2Total > user1Total: # if user2 paid more in bills
 
 if user1Total == user2Total: # if users paid the same amount
     print("You each paid the same amount")
+
