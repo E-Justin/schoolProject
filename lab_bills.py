@@ -46,7 +46,7 @@ while selection2 != 'n':
 
 print(user2Name + " paid the following amounts:")
 while count2 < index2: #displays each amount entered for user2
-    print(user2Bills[count2] + " : $" + user2Input[count2]) # prints the bill name and the amount
+    print(user2Bills[count2], " : $" + user2Input[count2]) # prints the bill name and the amount
     user2Total = user2Total + float(user2Input[count2]) # sums up the elements in the array to find total bills paid for user2
     count2 = count2 + 1
 
