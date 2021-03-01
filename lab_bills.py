@@ -1,6 +1,9 @@
 user1Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
 user2Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
 
+verify1 = int
+verify2 = int
+
 user1Total = float()
 user2Total = float()
 
@@ -28,7 +31,7 @@ while selection != 'n': # while selection is not n
 
 print(user1Name + " paid the following bills with these amounts:")
 while count < index: # displays each amount entered for user1
-    print(user1Bills[count] + " : $" + user1Input[count]) # prints the bill name and the amount
+    print("%s : $ %s ", user1Bills[count], user1Input[count]) # prints the bill name and the amount
     user1Total = user1Total + float(user1Input[count]) # adds up each element of the array to get the total amount bills paid for user1
     count = count + 1 # increases count to move to the next position in the array
 
@@ -46,7 +49,7 @@ while selection2 != 'n':
 
 print(user2Name + " paid the following amounts:")
 while count2 < index2: #displays each amount entered for user2
-    print(str(user2Bills[count2]) + " : $" + str(user2Input[count2])) # prints the bill name and the amount
+    print("%s : $ %s ", user2Bills[count2], user2Input[count2]) # prints the bill name and the amount
     user2Total = user2Total + float(user2Input[count2]) # sums up the elements in the array to find total bills paid for user2
     count2 = count2 + 1
 
@@ -65,4 +68,6 @@ if user2Total > user1Total: # if user2 paid more in bills
 
 if user1Total == user2Total: # if users paid the same amount
     print("You each paid the same amount")
+
+
 
