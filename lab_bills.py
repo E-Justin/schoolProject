@@ -1,23 +1,20 @@
-user1Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
-user2Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
+user1Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.] # array to hold user1's amount for each bill
+user2Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.] # array to hold user2's amount for each bill
 
-verify1 = int
-verify2 = int
+user1Total = float() # variable to hold total amount of bills paid by user1
+user2Total = float() # variable to hold total amount of bills paid by user2
 
-user1Total = float()
-user2Total = float()
+index = 0 # used to iterate through loops for user1
+count = 0 # used to iterate through loops for user1
 
-index = 0
-count = 0
+index2 = 0 # used to iterate through loops for user2
+count2 = 0 # used to iterate through loops for user2
 
-index2 = 0
-count2 = 0
+user1Name = str(input("What is user1's name?")) # stores user1's name
+user2Name = str(input("What is user2's name?")) # stores user2's name
 
-user1Name = str(input("What is user1's name?"))
-user2Name = str(input("What is user2's name?"))
-
-user1Bills = ['', '', '', '', '', '', '', '', '', '', ''] 
-user2Bills = ['', '', '', '', '', '', '', '', '', '', ''] 
+user1Bills = ['', '', '', '', '', '', '', '', '', '', ''] # array to hold the names of the bills paid by user1
+user2Bills = ['', '', '', '', '', '', '', '', '', '', ''] # array to hold the names of the bills paid by user2
 
 
 
@@ -68,7 +65,6 @@ if user2Total > user1Total: # if user2 paid more in bills
 
 if user1Total == user2Total: # if users paid the same amount
     print("You each paid the same amount")
-
 
 
 
