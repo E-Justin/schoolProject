@@ -4,6 +4,9 @@ user2Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.] # array to hold user2'
 user1Total = float() # variable to hold total amount of bills paid by user1
 user2Total = float() # variable to hold total amount of bills paid by user2
 
+selection = str
+selection2 = str
+
 index = 0 # used to iterate through loops for user1
 count = 0 # used to iterate through loops for user1
 
@@ -17,14 +20,21 @@ user1Bills = ['', '', '', '', '', '', '', '', '', '', ''] # array to hold the na
 user2Bills = ['', '', '', '', '', '', '', '', '', '', ''] # array to hold the names of the bills paid by user2
 
 
-
 selection = str(input("Would you like to enter bills paid by " + user1Name + "? y/n")) 
+while selection != 'y' and selection != 'n': # sends an error message and has user try again if selection is not a 'y' or 'n'
+    print("**Error** you must type a 'y' for yes or an 'n' for no")
+    selection = str(input("Would you like to enter bills paid by " + user1Name + "? y/n")) 
 
 while selection != 'n': # while selection is not n
     user1Bills[index] = str(input("What is the name of the bill that you are about to enter?")) # stores each bill name in array to display later
     user1Input[index] = str(input("How much did " + user1Name + " pay for " + user1Bills[index] + " this month?")) # stores user input in an array, starting at 0
     selection = str(input("Would you like to enter more bills paid by " + user1Name + "? y/n")) # continue bills for user1 or no
     index = index +1 #increases index to move to the next position in the array.
+    while selection != 'y' and selection != 'n': # sends an error message and has user try again if selection is not a 'y' or 'n'
+        print("**Error** you must type a 'y' for yes or an 'n' for no")
+        selection = str(input("Would you like to enter more bills paid by " + user1Name + "? y/n"))
+        
+
 
 print(user1Name + " paid the following bills with these amounts:")
 while count < index: # displays each amount entered for user1
@@ -37,12 +47,20 @@ print(user1Name + "'s Total =$", round(user1Total,2)) # displays user1's total
 
 
 selection2 = str(input("Would you like to enter bills paid by " + user2Name + "? y/n")) # selection2 = y/n
+while selection2 != 'y' and selection2 != 'n': # sends an error message and has user try again if selection is not a 'y' or 'n'
+    print("**Error** you must type a 'y' for yes or an 'n' for no")
+    selection2 = str(input("Would you like to enter bills paid by " + user2Name + "? y/n")) 
 
 while selection2 != 'n':
     user2Bills[index2] = str(input("What is the name of the bill that you are about to enter?")) # stores each bill name in array to display later
     user2Input[index2] = str(input("How much did " + user2Name + " pay for " + user2Bills[index2] + " this month?")) # stores user input in an array, starting at 0
     selection2 = str(input("Would you like to enter more bills paid by " + user2Name + "? y/n")) # continue, or no?
-    index2 = index2 +1 
+    index2 = index2 +1
+    while selection2 != 'y' and selection2 != 'n': # sends an error message and has user try again if selection is not a 'y' or 'n'
+        print("**Error** you must type a 'y' for yes or an 'n' for no")
+        selection2 = str(input("Would you like to enter bills paid by " + user2Name + "? y/n"))
+        
+ 
 
 print(user2Name + " paid the following amounts:")
 while count2 < index2: #displays each amount entered for user2
