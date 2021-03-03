@@ -4,8 +4,8 @@ user2Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.] # array to hold user2'
 user1Total = float() # variable to hold total amount of bills paid by user1
 user2Total = float() # variable to hold total amount of bills paid by user2
 
-selection = str
-selection2 = str
+selection = str # holds a 'y' or 'n' depending on whether the user wants to continue or not
+selection2 = str # holds a 'y' or 'n' depending on whether the user wants to continue or not
 
 index = 0 # used to iterate through loops for user1
 count = 0 # used to iterate through loops for user1
@@ -27,7 +27,7 @@ while selection != 'y' and selection != 'n': # sends an error message and has us
 
 while selection != 'n': # while selection is not n
     user1Bills[index] = str(input("What is the name of the bill that you are about to enter?")) # stores each bill name in array to display later
-    user1Input[index] = str(input("How much did " + user1Name + " pay for " + user1Bills[index] + " this month?")) # stores user input in an array, starting at 0
+    user1Input[index] = float(input("How much did " + user1Name + " pay for " + user1Bills[index] + " this month?")) # stores user input in an array, starting at 0
     selection = str(input("Would you like to enter more bills paid by " + user1Name + "? y/n")) # continue bills for user1 or no
     index = index +1 #increases index to move to the next position in the array.
     while selection != 'y' and selection != 'n': # sends an error message and has user try again if selection is not a 'y' or 'n'
@@ -53,7 +53,7 @@ while selection2 != 'y' and selection2 != 'n': # sends an error message and has 
 
 while selection2 != 'n':
     user2Bills[index2] = str(input("What is the name of the bill that you are about to enter?")) # stores each bill name in array to display later
-    user2Input[index2] = str(input("How much did " + user2Name + " pay for " + user2Bills[index2] + " this month?")) # stores user input in an array, starting at 0
+    user2Input[index2] = float(input("How much did " + user2Name + " pay for " + user2Bills[index2] + " this month?")) # stores user input in an array, starting at 0
     selection2 = str(input("Would you like to enter more bills paid by " + user2Name + "? y/n")) # continue, or no?
     index2 = index2 +1
     while selection2 != 'y' and selection2 != 'n': # sends an error message and has user try again if selection is not a 'y' or 'n'
