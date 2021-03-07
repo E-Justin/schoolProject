@@ -1,1 +1,1 @@
-# schoolProjectHelp
+# schoolProject
