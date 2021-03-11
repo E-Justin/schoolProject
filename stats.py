@@ -18,13 +18,21 @@ sorted(aList) # sorts the list in order from least to greatest
 
 #mean
 mean(aList)
+print(aList)
+print(sorted(aList))
 print("The mean of the list is %f" % mean(aList)) # prints the mean of the list
 
 
 # median
-index = 0
-nIndex = -1
 
-while index <= (len(aList) / 2):
-    leastToGreatest = sorted(aList) # sorts list in order from least to greatest and assigns it to a variable
+sortedList = sorted(aList)      ## does not work yet.. index error
+length = len(aList)
+if length % 2 == 1:
+    halfL = round(length / 2)
+    medain = sortedList[halfL]
+elif length % 2 ==0:
+    halfL = round(length / 2)
+    median = (sortedList[halfL] + sortedList[halfL + 1]) / 2
     
+
+print("The median of the list is %f" % median)
