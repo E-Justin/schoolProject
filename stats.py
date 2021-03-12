@@ -14,6 +14,19 @@ def mean(x):
 
     return quotient
 
+
+
+def findMedian(x):
+    sortedList = sorted(x)      ## does not work yet.. index error
+    length = len(x)
+    if length % 2 == 1: # if length is odd
+        halfL = round(length / 2)
+        medain = sortedList[halfL] # middle number in sorted list is median
+    elif length % 2 == 0: # if length is even
+        halfL = round(length / 2)
+        median = (sortedList[halfL -1 ] + sortedList[halfL]) / 2 # averages the middle two numbers to get median
+    return median
+
 sorted(aList) # sorts the list in order from least to greatest
 
 #mean
@@ -25,14 +38,7 @@ print("The mean of the list is %f" % mean(aList)) # prints the mean of the list
 
 # median
 
-sortedList = sorted(aList)      ## does not work yet.. index error
-length = len(aList)
-if length % 2 == 1: # if length is odd
-    halfL = round(length / 2)
-    medain = sortedList[halfL] # middle number in sorted list is median
-elif length % 2 == 0: # if length is even
-    halfL = round(length / 2)
-    median = (sortedList[halfL -1 ] + sortedList[halfL]) / 2 # averages the middle two numbers to get median
+
     
 
-print("The median of the list is %f" % median)
+print("The median of the list is %f" % findMedian(aList))
