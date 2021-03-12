@@ -27,12 +27,12 @@ print("The mean of the list is %f" % mean(aList)) # prints the mean of the list
 
 sortedList = sorted(aList)      ## does not work yet.. index error
 length = len(aList)
-if length % 2 == 1:
+if length % 2 == 1: # if length is odd
     halfL = round(length / 2)
-    medain = sortedList[halfL]
-elif length % 2 ==0:
+    medain = sortedList[halfL] # middle number in sorted list is median
+elif length % 2 == 0: # if length is even
     halfL = round(length / 2)
-    median = (sortedList[halfL] + sortedList[halfL + 1]) / 2
+    median = (sortedList[halfL -1 ] + sortedList[halfL]) / 2 # averages the middle two numbers to get median
     
 
 print("The median of the list is %f" % median)
