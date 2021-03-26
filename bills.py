@@ -32,7 +32,7 @@ while selection != 'n': # while selection is not n
     selection = str(input("Would you like to enter more bills paid by " + user1Name + "? y/n")) # continue bills for user1 or no
     index = index +1 #increases index to move to the next position in the array.
     while selection != 'y' and selection != 'n': # sends an error message and has user try again if selection is not a 'y' or 'n'
-        print("**Error** you must type a 'y' for yes or an 'n' for no")
+        print("**Error** you must type a 'y' for yes or an 'n' for no") 
         selection = str(input("Would you like to enter more bills paid by " + user1Name + "? y/n"))
         
 
