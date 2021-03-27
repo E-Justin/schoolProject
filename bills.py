@@ -1,4 +1,3 @@
-
 user1Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.] # array to hold user1's amount for each bill
 user2Input = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.] # array to hold user2's amount for each bill
 
@@ -17,6 +16,16 @@ count2 = 0 # used to iterate through loops for user2
 user1Name = str(input("What is user1's name?")) # stores user1's name
 user2Name = str(input("What is user2's name?")) # stores user2's name
 
+date = ()
+while len(date) < 10: # to make sure the user entered enough characters (there is probably a better way to do this)
+    date = str(input("Please enter today's date mm/dd/yyyy"))
+    if len(date) < 10:
+        print("***ERROR***")
+        print("You did not enter the date with the correct format") # prints error message if format was not correct
+        date = str(input("Please enter today's date mm/dd/yyyy")) # promts user to re-enter date in correct format
+
+
+
 user1Bills = ['', '', '', '', '', '', '', '', '', '', ''] # array to hold the names of the bills paid by user1
 user2Bills = ['', '', '', '', '', '', '', '', '', '', ''] # array to hold the names of the bills paid by user2
 
@@ -32,7 +41,7 @@ while selection != 'n': # while selection is not n
     selection = str(input("Would you like to enter more bills paid by " + user1Name + "? y/n")) # continue bills for user1 or no
     index = index +1 #increases index to move to the next position in the array.
     while selection != 'y' and selection != 'n': # sends an error message and has user try again if selection is not a 'y' or 'n'
-        print("**Error** you must type a 'y' for yes or an 'n' for no") 
+        print("**Error** you must type a 'y' for yes or an 'n' for no")
         selection = str(input("Would you like to enter more bills paid by " + user1Name + "? y/n"))
         
 
@@ -45,9 +54,16 @@ while count < index: # displays each amount entered for user1
 
 print(user1Name + "'s Total =$", round(user1Total,2)) # displays user1's total
 
-f = open("bills.txt", 'a')
-f.write("%s paid the following bills this month with these amounts.\n" % user1Name ) # this needs work to record data to file
-
+f = open("bills.txt", 'a') # creates/ appends to text file
+f.write("\nDate: %s\n" % date) # writes the date to created/ appended file
+f.write("************************************************************\n") # border
+f.write("%s's bills for the month.\n" % user1Name ) 
+j = 0 # used to index through next loop
+while count > j:
+    f.write("%s     :       %f\n" % (user1Bills[j], round(user1Input[j],2)))# prints bill name and amount next to each other
+    j += 1
+f.write("%s's TOTAL: $%f" % (user1Name, user1Total))
+f.close() # closes file
 
 
 
@@ -72,6 +88,18 @@ while count2 < index2: #displays each amount entered for user2
     print("%s : $ %s " % (user2Bills[count2], user2Input[count2])) # prints the bill name and the amount
     user2Total = user2Total + float(user2Input[count2]) # sums up the elements in the array to find total bills paid for user2
     count2 = count2 + 1
+
+    f = open("bills.txt", 'a') # creates/ appends to text file
+f.write("\nDate: %s\n" % date) # writes the date to created/ appended file
+f.write("************************************************************\n") # border
+f.write("%s's bills for the month.\n" % user2Name ) 
+i = 0 # used to index through next loop
+while count > i:
+    f.write("%s     :       %f\n" % (user2Bills[i], round(user2Input[i],2)))# prints bill name and amount next to each other
+    i += 1
+f.write("%s's TOTAL: $%f" % (user2Name, user2Total))
+f.close() # closes file
+
 
 print("***** " + user1Name + "'s Total this month ***** =$", round(user1Total,2))
 print("***** " + user2Name + "'s Total this month ***** =$", round(user2Total,2))
