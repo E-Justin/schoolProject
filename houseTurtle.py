@@ -1,11 +1,8 @@
 """ draw a house using turtle """
 
 import turtle
-from polygons import *
-
 
 t = turtle.Pen()
-
 
 t.home
 
@@ -23,7 +20,6 @@ t.right(90)
 t.forward(100) # completes rectangle that is 200 x 250 pixels
 t.end_fill()
 t.home # moves turtle back to the center and facing East
-
 
 
 t.home
@@ -149,8 +145,16 @@ t.forward(40) # second window done
 t.end_fill()
 
 
-
-
+t.up()
+t.home()
+t.right(90)
+t.forward(275)
+t.pencolor("brown")
+t.down()
+t.right(90)
+t.forward(125)
+t.right(180)
+t.forward(250) # completes line at the bottom
 
 
 turtle.Screen().exitonclick() # allows the user to determine when the drawing window is closed (by clicking)
