@@ -16,6 +16,8 @@ from breezypythongui import EasyFrame
 from tkinter import *
 import tkinter as tk
 import tkinter.filedialog
+from tkinter.font import Font
+from tkinter import PhotoImage
 from PIL import Image, ImageTk # place this @ end to avoid errors
 import os
 
@@ -26,7 +28,7 @@ class ButtonDemo(EasyFrame):
 
     def __init__(self):
         """Sets up the window, label, and buttons."""
-        EasyFrame.__init__(self, title = "Button Demo")
+        EasyFrame.__init__(self, title = "NewPic Program")
 
         # A single label in the first row.
         self.label = self.addLabel(text = "NewPic Program!",
@@ -49,17 +51,20 @@ class ButtonDemo(EasyFrame):
     def choose(self):
         """Pops up an open file dialog, and if a file is
         selected, displays its image in a new window"""
+        
         f = tkinter.filedialog.askopenfilename() # opens file dialog to allow user to select a .gif file
-        load = Image.open(f)
-        render = ImageTk.PhotoImage(load)
+        top = Toplevel()
+        top.title('Second WIndow')
+        top.load = Image.open(f)
+        render = ImageTk.PhotoImage(top.load)
 
-        img = Label(self, image = render)
+        img = Label(top, image = render) # here is how the image was placed in a new window
         img.image = render
         img.place(x=0, y=0)
 
         
 
-        root = Tk(f)
+        
         print(f)
         
         
