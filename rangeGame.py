@@ -13,11 +13,17 @@ User interface design is your call.  Make sure that the directions are clear to 
 import random
 from breezypythongui import EasyFrame
 
+#globals
+win = 0
+loss = 0
+
+
+
 def generateRandomNumber(a,b):
     randomNumber = random.randint(a,b)
     return randomNumber
 
-class ButtonDemo(EasyFrame):
+class rangeGame(EasyFrame):
     """Illustrates command buttons and user events."""
 
     def __init__(self):
@@ -45,19 +51,38 @@ class ButtonDemo(EasyFrame):
                                              column = 5,
                                              state = "readonly")
 
-        # A single label in the first row.
-        self.label = self.addLabel(text = "Range Game!",
-                                   row = 0, column = 0,
-                                   columnspan = 2, sticky = "NSEW")
+        
+       
 
-        # Two command buttons in the second row.
+        # Label to display wins
+        self.label = self.addLabel(text = " Wins: " + str(win), row = 0, column = 0, columnspan = 1)
+        # label to display losses
+        self.label = self.addLabel(text = " Losses: " + str(win), row = 0, column = 1, columnspan = 1)
+
+        # button to generate a random number.
         self.randomNumber = self.addButton(text = "Random Number",
                                        row = 2, column = 1,
                                        command = self.randomNumber)
+        # button to allow user to guess the outcome
+        self.guess = self.addButton(text = "Guess the outcome?",
+                                       row = 2, column = 3,
+                                       command = self.guess)
+                                       
         
+    # prompter box
+    def guess(self):
+        text = self.prompterBox(title = "Input Dialog",promptString = "What is your guess?:")
+        self.label = self.addLabel(text = "Your guess = " + text, row = 0, column = 3)
+        
+        global guessedNumber
+        guessedNumber = text
+        
+    
+    
 
     # Methods to handle user events.
     def randomNumber(self):
+        global result
         """Generates a random number within a range specified by the user."""
         self.randomNumber["state"] = "active"
         a = int(self.rangeLow.get())
@@ -65,14 +90,15 @@ class ButtonDemo(EasyFrame):
         result = generateRandomNumber(a,b)
         self.outputField.setText(result)
 
-        
-        
+    
 
     
+  
 
 def main():
     """Instantiate and pop up the window."""
-    ButtonDemo().mainloop()
+    rangeGame().mainloop()
 
 if __name__ == "__main__":
     main()
+
