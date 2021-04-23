@@ -65,21 +65,17 @@ class PigDice(EasyFrame):
         total = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] # to hold the value of each roll
         thisRoll = 0
         self.die1.roll() # rolls the dice
-        while thisRoll != 1: # if a 1 is rolled, turn is over
-
+                    
+        thisRoll = self.die1.getValue() # get value of the die
+        self.refreshImages() # refreshes image, showing the image of a die with the correct value (randomly selected)
             
-            thisRoll = self.die1.getValue() # get value of the die
-            self.refreshImages() # refreshes image, showing the image of a die with the correct value (randomly selected)
-            
-
-            total[count] = thisRoll # places the current die value in the appropriate index based off of how many rolls the player has made
-            totalSum = sum(total)
+        total[count] = thisRoll # places the current die value in the appropriate index based off of how many rolls the player has made
+        totalSum = sum(total)
                 
-            self.stateLabel["text"] = "Total Points = " + str(totalSum)  # displays user's current total     
+        self.stateLabel["text"] = "Total Points = " + str(totalSum)  # displays user's current total     
             
-            count +=1
-            
-            
+        count +=1
+                       
         if thisRoll == 1: # if player rolls a 1, turn is over and everything resets.
             self.stateLabel["text"] = "You rolled a 1: Your turn is over"
             self.refreshImages()
