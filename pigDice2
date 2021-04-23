@@ -70,7 +70,7 @@ class PigDice(EasyFrame):
 
     
     def passTurn(self):
-                                       #Computer's turn******************************************************************
+        #Computer's turn******************************************************************
         
         while self.computerThisRoll != 1:
 
@@ -87,6 +87,10 @@ class PigDice(EasyFrame):
             self.addLabel(text = "Their Total: " + str(self.computerTotal), row = 3, column = 2)
             #self.stateLabel["text"] = "Total = " + str(self.total)
             self.refreshImages()
+            if self.total >= 100:
+                self.addLabel(text = "You Win!: ", row = 3, column = 0)
+            if self.computerTotal >= 100:
+                self.addLabel(text = "You Lose!: ", row = 3, column = 0)
 
 
     def nextRoll(self):
@@ -99,6 +103,8 @@ class PigDice(EasyFrame):
 
         if self.thisRoll == 1: # no points if a 1 is rolled
             self.thisRoll = 0
+            self.passTurn
+            
 
         
         self.total = self.total + self.thisRoll
@@ -107,6 +113,10 @@ class PigDice(EasyFrame):
         self.addLabel(text = "Their Total: " + str(self.computerTotal), row = 3, column = 2)
         #self.stateLabel["text"] = "Total = " + str(self.total)
         self.refreshImages()
+        if self.total >= 100:
+                self.addLabel(text = "You Win!: ", row = 3, column = 0)
+        if self.computerTotal >= 100:
+                self.addLabel(text = "You Lose!: ", row = 3, column = 0)
 
     def computersTurn(self):
                 #Computer's turn******************************************************************
@@ -126,6 +136,10 @@ class PigDice(EasyFrame):
             self.addLabel(text = "Their Total: " + str(self.computerTotal), row = 3, column = 2)
             #self.stateLabel["text"] = "Total = " + str(self.total)
             self.refreshImages()
+            if self.total >= 100:
+                self.addLabel(text = "You Win!: ", row = 3, column = 0)
+            if self.computerTotal >= 100:
+                self.addLabel(text = "You Lose!!: ", row = 3, column = 0)
 
 
 
