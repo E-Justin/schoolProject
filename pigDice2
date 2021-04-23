@@ -26,6 +26,7 @@ under your source directory called DICE (all caps)."""
 from breezypythongui import EasyFrame
 from tkinter import PhotoImage
 from die import Die
+import random
 
 class PigDice(EasyFrame):
    
@@ -36,8 +37,9 @@ class PigDice(EasyFrame):
         EasyFrame.__init__(self, title = "Dice Demo")
 
         #instance variable declaration
-        self.total = 0
+        self.total = 0 
         self.thisRoll = 0
+        self.computerTotal = 0
 
         self.setSize(220, 200)
         self.die1 = Die()
@@ -52,15 +54,17 @@ class PigDice(EasyFrame):
         self.stateLabel = self.addLabel("", row = 1, column = 0,
                                         sticky = "NSEW",
                                         columnspan = 2)
-        self.addButton(row = 2, column = 0,
+        
+
+        self.nextRollBtn = self.addButton(row = 2, column = 0,
                        text = "Roll",
-                       command = self.nextRoll)
+                       command = self.nextRoll, state = "disabled")
         self.addButton(row = 2, column = 1,
                        text = "Begin",
                        command = self.newGame)
-        self.addButton(row = 2, column = 3,
+        self.passTurnBtn = self.addButton(row = 2, column = 3,
                        text = "Pass",
-                       command = self.passTurn)
+                       command = self.passTurn, state = "disabled")
         self.refreshImages()
 
     
@@ -69,26 +73,28 @@ class PigDice(EasyFrame):
 
 
     def nextRoll(self):
-        """Rools the dice and updates the view with
+        """Rolls the dice and updates the view with
         the results."""
         
-        self.die1.roll()
-        self.thisRoll = self.die1.getValue()
+        self.die1.roll() 
+        self.thisRoll = self.die1.getValue() 
+
+        if self.thisRoll == 1: # no points if a 1 is rolled
+            self.thisRoll = 0
 
         
         self.total = self.total + self.thisRoll
            
         self.stateLabel["text"] = "Total = " + str(self.total)
         self.refreshImages()
-
-
-        
-        
-        
         
 
     def newGame(self):
         """Create a new game and enables the other buttons."""
+        
+        
+        self.nextRollBtn["state"] = "normal"
+        self.passTurnBtn["state"] = "normal"
         self.die1 = Die()
         
         self.stateLabel["text"] = ""
