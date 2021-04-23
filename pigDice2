@@ -26,7 +26,7 @@ under your source directory called DICE (all caps)."""
 from breezypythongui import EasyFrame
 from tkinter import PhotoImage
 from die import Die
-global total
+
 class PigDice(EasyFrame):
    
     def __init__(self):
@@ -34,6 +34,11 @@ class PigDice(EasyFrame):
         for the two dice to be displayed, the state label,
         and the two command buttons."""
         EasyFrame.__init__(self, title = "Dice Demo")
+
+        #instance variable declaration
+        self.total = 0
+        self.thisRoll = 0
+
         self.setSize(220, 200)
         self.die1 = Die()
         
@@ -66,26 +71,24 @@ class PigDice(EasyFrame):
     def nextRoll(self):
         """Rools the dice and updates the view with
         the results."""
-        total = 0
-        thisRoll = 0
-
-        while thisRoll != 1:
-
-            self.die1.roll()
-            thisRoll = self.die1.getValue()
-            total = thisRoll + total
-
-            
-            
-            self.stateLabel["text"] = "Total = " + str(total)
-            self.refreshImages()
         
-        total = 0
-        thisRoll = 0
+        self.die1.roll()
+        self.thisRoll = self.die1.getValue()
+
+        
+        self.total = self.total + self.thisRoll
+           
+        self.stateLabel["text"] = "Total = " + str(self.total)
+        self.refreshImages()
+
+
+        
+        
+        
         
 
     def newGame(self):
-        """Create a new craps game and updates the view."""
+        """Create a new game and enables the other buttons."""
         self.die1 = Die()
         
         self.stateLabel["text"] = ""
