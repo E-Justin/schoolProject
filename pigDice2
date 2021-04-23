@@ -40,8 +40,9 @@ class PigDice(EasyFrame):
         self.total = 0 
         self.thisRoll = 0
         self.computerTotal = 0
+        self.computerThisRoll = 0
 
-        self.setSize(220, 200)
+        self.setSize(250, 250)
         self.die1 = Die()
         
         self.dieLabel1 = self.addLabel("", row = 0,
@@ -59,7 +60,7 @@ class PigDice(EasyFrame):
         self.nextRollBtn = self.addButton(row = 2, column = 0,
                        text = "Roll",
                        command = self.nextRoll, state = "disabled")
-        self.addButton(row = 2, column = 1,
+        self.beginBtn = self.addButton(row = 2, column = 1,
                        text = "Begin",
                        command = self.newGame)
         self.passTurnBtn = self.addButton(row = 2, column = 3,
@@ -69,14 +70,31 @@ class PigDice(EasyFrame):
 
     
     def passTurn(self):
-        x = 1
+                                       #Computer's turn******************************************************************
+        
+        while self.computerThisRoll != 1:
+
+            self.die1.roll() 
+            self.computerThisRoll = self.die1.getValue() 
+
+            if self.computerThisRoll == 1: # no points if a 1 is rolled
+                self.thisRoll = 0
+
+            
+            self.computerTotal = self.computerTotal + self.computerThisRoll
+            
+            self.addLabel(text = "Your Total: " + str(self.total), row = 3, column = 0)
+            self.addLabel(text = "Their Total: " + str(self.computerTotal), row = 3, column = 2)
+            #self.stateLabel["text"] = "Total = " + str(self.total)
+            self.refreshImages()
 
 
     def nextRoll(self):
         """Rolls the dice and updates the view with
         the results."""
-        
+        # Your turn***********************************************************************
         self.die1.roll() 
+        self.computerThisRoll = 0
         self.thisRoll = self.die1.getValue() 
 
         if self.thisRoll == 1: # no points if a 1 is rolled
@@ -85,20 +103,48 @@ class PigDice(EasyFrame):
         
         self.total = self.total + self.thisRoll
            
-        self.stateLabel["text"] = "Total = " + str(self.total)
+        self.addLabel(text = "Your Total: " + str(self.total), row = 3, column = 0)
+        self.addLabel(text = "Their Total: " + str(self.computerTotal), row = 3, column = 2)
+        #self.stateLabel["text"] = "Total = " + str(self.total)
         self.refreshImages()
+
+    def computersTurn(self):
+                #Computer's turn******************************************************************
         
+        while self.computerThisRoll != 1:
+
+            self.die1.roll() 
+            self.computerThisRoll = self.die1.getValue() 
+
+            if self.computerThisRoll == 1: # no points if a 1 is rolled
+                self.thisRoll = 0
+
+            
+            self.computerTotal = self.computerTotal + self.computerThisRoll
+            
+            self.addLabel(text = "Your Total: " + str(self.total), row = 3, column = 0)
+            self.addLabel(text = "Their Total: " + str(self.computerTotal), row = 3, column = 2)
+            #self.stateLabel["text"] = "Total = " + str(self.total)
+            self.refreshImages()
+
+
 
     def newGame(self):
         """Create a new game and enables the other buttons."""
+        self.total = 0
+        self.computerTotal = 0
         
-        
+        self.addLabel(text = "Your Total: " + str(self.total), row = 3, column = 0)
+        self.addLabel(text = "Their Total: " + str(self.computerTotal), row = 3, column = 2)
+
         self.nextRollBtn["state"] = "normal"
         self.passTurnBtn["state"] = "normal"
+        self.beginBtn["state"] = "disabled"
         self.die1 = Die()
         
         self.stateLabel["text"] = ""
         self.refreshImages()
+
         
     def refreshImages(self):
         """Updates the images in the window."""
