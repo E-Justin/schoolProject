@@ -8,9 +8,9 @@ now = datetime.now() # holds the time/ date in the following format: 2021-05-06 
                                                                     
 currentTime = now.strftime("%H:%M:%S")# converts time to a string in the following format: hh:mm:ss
 
-secondsInADay = 86400
-minutesInADay = 1440
-hoursInADay = 24
+secondsInADay = 86400 # not used in this program (building off of this for a more advanced program)
+minutesInADay = 1440  # not used in this program (building off of this for a more advanced program)
+hoursInADay = 24      # not used in this program (building off of this for a more advanced program)
 
 minutesUntil = 0
 secondsUntil = 0
