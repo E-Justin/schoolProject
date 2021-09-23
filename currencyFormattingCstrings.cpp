@@ -1,11 +1,5 @@
 
 
-// justin.ezell059@my.tccd.edu
-// Assignment 3
-// August 25, 2021
-// Programming fundamentals II
-// COSC-1437-86003
-
 #include <iomanip>  // input/ output library
 #include <string> // to use strings
 #include <iostream> // cin and cout..
@@ -14,13 +8,13 @@
 using namespace std;
 
 
+char input[10];
+int i;
+string x;
+int dp;
 
 
-
-int dp; // global variable to hold value to represent decimal
-
-
-int dollarFormat(string x) // used to find the decimal point
+int dollarFormat(string x)
 {
 
 
@@ -38,7 +32,24 @@ int dollarFormat(string x) // used to find the decimal point
 
 }
 
+int decimalIndex(char x[])
+{
+	i = 0;
+	bool isAdecimal = false;
+	int size = strlen(x);
+	while (i < size)
+	{
 
+		isAdecimal = ispunct(x[i]);
+		if (isAdecimal == true)
+		{
+			cout << "decimal is at this index: " << i << endl;
+			return i;
+		}
+		i++;
+	}
+	return i;
+}
 
 
 
@@ -46,10 +57,11 @@ int main()
 {
 
 	char input[15];
-	char moneySign[15] = "$"; // hold $ to concatenate input at the end.
-	char decimalPoints[17]; // will hold decimal and all digits to the right
-	char front[15]; // will hold all characters to the left of the decimal
-	char* strPtr = nullptr; // = nullPtr unless a decimal is found
+	char moneySign[15] = "$";
+	char decimalPoints[17];
+	char newString[10];
+
+
 
 
 	cout << "Please enter a dollar amount between 0 and 999.99999. " << endl;
@@ -60,14 +72,14 @@ int main()
 
 	dollarFormat(input); // if dp = -1: no decimal
 
-	
+	char front[15] = " ";
 	if (dp == -1) // if no decimal
 	{
 		strcat_s(input, ".00"); // concatenates the decimal and trailing zeros for currency format
 	}
 	else // if there is a decimal
 	{
-		
+		char* strPtr = nullptr;
 		strPtr = strstr(input, "."); // gets the decimal and everything to the right of the decimal and stores it in strPtr
 
 		if (strPtr != nullptr)
