@@ -1,5 +1,4 @@
 
-
 #include <iomanip>  // input/ output library
 #include <string> // to use strings
 #include <iostream> // cin and cout..
@@ -8,10 +7,7 @@
 using namespace std;
 
 
-char input[10];
-int i;
-string x;
-int dp;
+int dp; // global variable to be returned from dollarFormat function.
 
 
 int dollarFormat(string x)
@@ -32,35 +28,18 @@ int dollarFormat(string x)
 
 }
 
-int decimalIndex(char x[])
-{
-	i = 0;
-	bool isAdecimal = false;
-	int size = strlen(x);
-	while (i < size)
-	{
 
-		isAdecimal = ispunct(x[i]);
-		if (isAdecimal == true)
-		{
-			cout << "decimal is at this index: " << i << endl;
-			return i;
-		}
-		i++;
-	}
-	return i;
-}
 
 
 
 int main()
 {
 
-	char input[15];
-	char moneySign[15] = "$";
-	char decimalPoints[17];
-	char newString[10];
-
+	char input[15]; // to hold user input
+	char moneySign[15] = "$"; // will concatenate at the end, so dollar sign is in front of digit in currency format.
+	char decimalPoints[17]; // to hold the decimal and everything to the right of the decimal
+	char front[15] = " "; // to hold all digits to the right of the decimal
+	char* strPtr = nullptr;
 
 
 
@@ -72,14 +51,14 @@ int main()
 
 	dollarFormat(input); // if dp = -1: no decimal
 
-	char front[15] = " ";
+	
 	if (dp == -1) // if no decimal
 	{
 		strcat_s(input, ".00"); // concatenates the decimal and trailing zeros for currency format
 	}
 	else // if there is a decimal
 	{
-		char* strPtr = nullptr;
+		
 		strPtr = strstr(input, "."); // gets the decimal and everything to the right of the decimal and stores it in strPtr
 
 		if (strPtr != nullptr)
@@ -114,19 +93,17 @@ int main()
 
 	if (dp == -1) // if no decimal in input
 	{
-		strcat_s(moneySign, input);
+		strcat_s(moneySign, input); // concatenates $ in front of formatted currency.
 		cout << moneySign;
 	}
 
 	if (dp != -1) // if there is a decimal in input
 	{
-		cout << "Beginning : " << front << endl;
-		cout << "End : " << decimalPoints << endl;
 
 		strcat_s(front, decimalPoints); // concatenates the two strings together, concatenated string is stored in 'front' variable;
-		strcat_s(moneySign, front);
+		strcat_s(moneySign, front); // concatenates the two strings together with $ in front of the currency
 
-		cout << "new string with correct format = " << moneySign;
+		cout << "new string with correct format = " << moneySign; // new string in corrected format is printed
 
 	}
 
