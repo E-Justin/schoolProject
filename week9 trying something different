@@ -1,113 +1,153 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <windows.management.update.h>
+
+#include <iomanip>  // input/ output library
+#include <string> // to use strings
+#include <iostream> // cin and cout..
+#include <cstdlib>
+#include <cstring>
+using namespace std;
 
 
 
 
-struct dateAndTime
+int dp; // global variable to be returned from dollarFormat function.
+char* exitPointer = nullptr;
+
+
+int howManyWholeNumberPlaceValues(char x[]) // used to find how many digits are to the left of the decimal in a c-string
 {
-	int day;
-	int month;
-	int year;
-	int hour;
-	int minutes;
-	int seconds;
-};
+	char decimal[3] = ".";
+	char* decimalPointer = nullptr;
+	decimalPointer = strstr(x, decimal);
 
-const int daysPerMonth[12] = { 31, 28, 31, 30, 31, 30,	// number of days in each month
-						31, 31, 30, 31, 30, 31 };
+	int length;
 
-struct dateAndTime currentTime, nextTime;
-
-
-
-
-
-struct dateAndTime timeUpdate(struct dateAndTime now)		// function to update time by one second
-{
-	++now.seconds;
-
-	if (now.seconds == 60)	// next minute
+	if (decimalPointer == nullptr)// if no decimal was found
 	{
-		now.seconds = 0;
-		++now.minutes;
+		dp = -1;
+	}
+	else
+	{
+		int wholeString = strlen(x); // gets the length of the entire string
+		int decimals = strlen(strstr(x, ".")); // gets the length of the decimal and everything to the right of the decimal and stores it in strPtr
+		dp = wholeString - decimals; // gets the length of just the digits to the left of the decimal.
+	}
 
-		if (now.minutes == 60)	// next hour
+	return dp;
+
+
+
+
+}
+
+
+void currencyFormat() // used to format a c-string into currency format
+{
+
+
+	char moneySign[15] = "$"; // will concatenate at the end, so dollar sign is in front of digit in currency format.
+	char decimalPoints[17] = " "; // to hold the decimal and everything to the right of the decimal
+	char front[15] = " "; // to hold all digits to the right of the decimal
+
+	char trailingZeros[15] = ".00";
+	char input[15] = "     ";
+	char blankCstring[15] = " ";
+	char x[3] = "xX"; // use this to help exit loop
+
+	char* strPtr = nullptr;
+
+
+
+
+	while (exitPointer == nullptr)
+	{
+		char moneySign[15] = "$"; // will concatenate at the end, so dollar sign is in front of digit in currency format.
+		char decimalPoints[17] = " "; // to hold the decimal and everything to the right of the decimal
+		char front[15] = " "; // to hold all digits to the right of the decimal
+
+		char trailingZeros[15] = ".00";
+		char input[15] = "     ";
+
+
+		cout << "Please enter a dollar amount between 0 and 999.99999. " << endl;
+		cout << "Or press X to exit ";
+		cin >> input;
+
+		exitPointer = strstr(x, input); // == null pointer unless an X or x is found
+		if (exitPointer != nullptr)
 		{
-			now.minutes = 0;
-			++now.hour;
+			return; // exits the method if x or X is found
+		}
 
-			if (now.hour == 24)	// midnight
+		howManyWholeNumberPlaceValues(input); // if dp = -1: no decimal
+
+
+		if (dp == -1) // if no decimal
+		{
+			strcat_s(input, ".00"); // concatenates the decimal and trailing zeros for currency format
+		}
+		else // if there is a decimal
+		{
+
+			strPtr = strstr(input, "."); // gets the decimal and everything to the right of the decimal and stores it in strPtr
+
+			if (strPtr != nullptr)
 			{
-				now.hour = 0;
-				++now.day;
-				
+
+				for (int j = 0; j < 3; j++)																												// this loop may need to go
+				{
+					strcpy_s(decimalPoints, strPtr); // builds new string with the decimal and only two digits to the right of the decimal.
+
+				}
+				if (strlen(strPtr) == 2) // if there is only one number to the right of the decimal
+				{
+					strcat_s(decimalPoints, "0");
+				}
+				if (strlen(strPtr) == 1) // if there is a decimal, but no numbers to the right
+				{
+					strcat_s(decimalPoints, "00");
+				}
+				if (strlen(strPtr) > 2) // if there are more than 2 digits to the right of the dceimal
+				{
+					strncpy_s(decimalPoints, strPtr, 3); // copies the first 3 characters of strPtr into decimalPoints
+
+				}
 			}
+
+			for (int j = 0; j < dp; j++)
+			{
+				front[j] = input[j]; // builds new c-string for numbers before the decimal
+			}
+
+		}
+
+		if (dp == -1) // if no decimal in input
+		{
+			strcat_s(moneySign, input); // concatenates $ in front of formatted currency.
+			cout << "New C-string with the correct format = " << moneySign << endl;
+			moneySign[0] = '\0';
+
+		}
+
+		if (dp != -1) // if there is a decimal in input
+		{
+
+			strcat_s(front, decimalPoints); // concatenates the two strings together, concatenated string is stored in 'front' variable;
+			strcat_s(moneySign, front); // concatenates the two strings together with $ in front of the currency
+
+			cout << "New C-string with correct format = " << moneySign << endl; // new string in corrected format is printed
+			moneySign[0] = '\0';
+
+
 		}
 	}
-	return now;
-}
-
-bool isLeapYear(struct dateAndTime d)	// function to determine if it is a leap year
-{
-	bool leapYearFlag;
-
-	if ((d.year % 4 == 0 && d.year % 100 != 0) || d.year % 400 == 0)
-
-		leapYearFlag = true;	// it is a leap year
-	else
-		leapYearFlag = false;	// not a leap year
-
-	return leapYearFlag;
-}
-
-int numberOfDays(struct dateAndTime d)	// function to find the number of days in a month
-{
-	int days;
-	bool isLeapYear(struct dateAndTime d);
-	const int daysPerMonth[12] = { 31, 28, 31, 30, 31, 30,	// number of days in each month
-						31, 31, 30, 31, 30, 31 };
-
-	if (isLeapYear(d) == true && d.month == 2)
-		days = 29;
-	else
-		days = daysPerMonth[d.month - 1];
-
-	return days;
-}
-
-struct dateAndTime dateUpdate(struct dateAndTime now)
-{
-	if (currentTime.day > days)
-	{
-		now.day = 1;
-		++now.month;
-	}
-
-	return now;
+	return;
 }
 
 
-int main(void)
+int main()
 {
-	printf("Enter the time in military time (hh:mm:ss): \n");
-	scanf_s("%i:%i:%i", &currentTime.hour, &currentTime.minutes,
-		&currentTime.seconds);
 
-	printf("Enter today's date (mm dd yyyy): \n");
-	scanf_s("%i%i%i", &currentTime.month, &currentTime.day, &currentTime.year);
+	currencyFormat();
 
-	struct dateAndTime timeUpdate(struct dateAndTime now);
-	struct dateAndTime dateUpdate(struct dateAndTime now);
-
-	nextTime = timeUpdate(currentTime);
-
-	printf("***One second from the time you put in is***\n");
-	printf("Date: %i/%i/%.2i\n", nextTime.month, nextTime.day, nextTime.year);
-	printf("Time: %i:%i:%i\n", nextTime.hour, nextTime.minutes, nextTime.seconds);
-	
-	
 	return 0;
-
 }
