@@ -24,9 +24,15 @@ bool emailValidation(string x)
 	int atSignIndex;
 	int length;
 	length = x.length();
-	string input;
+	
 		
-
+	
+		
+		if (x == "x" || x == "X")
+		{
+			validated = false;
+			return validated;
+		}
 		if (x.find(" ") < length) // testing for whitespace	
 		{
 			cout << "***ERROR***" << endl;
@@ -67,43 +73,32 @@ bool emailValidation(string x)
 		else
 		{
 			validated = true; // returns true if all tests are passed
-			
+
 		}
 
 		if (validated == true)
 		{
-			cout << "Your email has been successfully validated " << endl;
+			cout << "Your email is valid " << endl;
 		}
 		else
 		{
-			cout << "***ERROR***\nYour email is invalid " << endl;
+			cout << "Your email is invalid " << endl;
 		}
+	
 		return validated;
 	
 }
 
 int main()
 {
-	
+	string input;
 
-	
-	
 	while (input != "x" && input != "X")
 	{
-		cout << "Enter an email " << endl;
+		cout << "Enter an email or press X to exit " << endl;
 		getline(cin, input); // gets full line of input (including space if there is one)
 		emailValidation(input);
 	}
-	
-
-
-
-
-
-	
-
-	
-	
 
 	return 0;
 }
