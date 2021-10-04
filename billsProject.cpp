@@ -32,7 +32,7 @@ Bills person1, person2, person3, person4, person5;
 
 
 
-Bills perPersonTotal(Bills personNumber)
+Bills perPersonTotal(Bills &personNumber) // displays menu and allows user to enter in amounts for each bill paid by that person.
 {
 	cout << "What is the person's name that you are about to enter bill amounts for?  ";
 	cin >> personNumber.name;
@@ -58,7 +58,7 @@ Bills perPersonTotal(Bills personNumber)
 		}
 		if (selection == "2") // rent/ mortgage
 		{
-			cout << "How much did " << personNumber.name << " pay for water this month ?";
+			cout << "How much did " << personNumber.name << " pay for rent/ mortgage this month ?";
 			cin >> personNumber.rent;
 		}
 		if (selection == "3") // electricity
@@ -68,7 +68,7 @@ Bills perPersonTotal(Bills personNumber)
 		}
 		if (selection == "4") // groceries
 		{
-			cout << "How much did " << personNumber.name << " pay for water this month ?";
+			cout << "How much did " << personNumber.name << " pay for groceries this month ?";
 			cin >> personNumber.rent;
 		}
 		if (selection == "5") // insurance
@@ -89,19 +89,36 @@ Bills perPersonTotal(Bills personNumber)
 	}
 	personNumber.total = personNumber.water + personNumber.rent + personNumber.electricity + personNumber.groceries + personNumber.other;
 	cout << endl << personNumber.name << "'s total is : $" << personNumber.total << endl << endl;
+
 	return personNumber;
 
+}
+
+Bills displayBillsperPerson(Bills &personNumber) // to display all bills paid by that person
+{
+	cout << " ********** " << personNumber.name << " ********** " << endl;
+	cout << "Water       : $" << personNumber.water << endl;
+	cout << "Rent        : $" << personNumber.rent << endl;
+	cout << "Electricity : $" << personNumber.electricity << endl;
+	cout << "Groceries   : $" << personNumber.groceries << endl;
+	cout << "Insurance   : $" << personNumber.water << endl;
+	if (personNumber.paidOther == true)
+	{
+		cout << personNumber.otherIs << "     : $" << personNumber.water << endl;
+	}
+
+	cout << personNumber.name << "'s total : $" << personNumber.total << endl;
+	
+	return personNumber;
 }
 
 
 int main()
 {
-	/*
-	cout << "How many people (including yourself) are splitting the bills?  ";
-	cin >> numberOfPeople;
-	*/
+	
 
 	perPersonTotal(person1);
+	displayBillsperPerson(person1);
 
 	return 0;
 }
