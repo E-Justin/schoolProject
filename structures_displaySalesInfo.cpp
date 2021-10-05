@@ -6,31 +6,27 @@
 #include <cctype>
 using namespace std;
 
+struct CreditCardItems
+{
+	long long cardNumber;
+	string userName;
+	int expirationDate;
+	int securityCode;
+};
+
+
 struct Sales
 {
 	int itemNumber;
 	string itemName;
 	int itemQuantity;
 	double totalCost;
-	long long cardNumber;
-	string userName;
-	int expirationDate;
-	int securityCode;
+	CreditCardItems CardInfo; // extra credit
 	bool isValid = false;
 };
 
-Sales person1 =			// for testing purposes only
-{
-	1001,
-	"Foam Padding",
-	12,
-	123.49,
-	123456789,
-	"Jon Doe",
-	1215,
-	123,
 
-};
+
 
 void displaySalesData(Sales x) // method to display sales info 
 {
@@ -38,10 +34,10 @@ void displaySalesData(Sales x) // method to display sales info
 	cout << "Item Name: " << x.itemName << endl;
 	cout << "Item Quantity: " << x.itemQuantity << endl;
 	cout << "Total Cost: " << x.totalCost << endl;
-	cout << "Card Number: " << x.cardNumber << endl;
-	cout << "User name: " << x.userName << endl;
-	cout << "Expiration Date MMYY: " << x.expirationDate << endl;
-	cout << "Security Code: " << x.securityCode << endl;
+	cout << "Card Number: " << x.CardInfo.cardNumber << endl;
+	cout << "User name: " << x.CardInfo.userName << endl;
+	cout << "Expiration Date MMYY: " << x.CardInfo.expirationDate << endl;
+	cout << "Security Code: " << x.CardInfo.securityCode << endl;
 	
 
 	return;
@@ -79,6 +75,7 @@ void preCheck(Sales &x) // passing a strucutre by reference as an argument
 		// item cost == $4.25
 		x.totalCost = (x.itemQuantity * 4.25);
 	}
+	return;
 }
 
 
@@ -88,35 +85,35 @@ int main()
 	
 	cout << boolalpha; // step 1
 
-	Sales inputData; //step 2
+	Sales InputData; // step 2
 
-	cout << "What is the item number?" << endl;  // step 3
-	cin >> inputData.itemNumber;
-	cout << "What is the item quantity?" << endl;
-	cin >> inputData.itemQuantity;
+	cout << "What is the item number?";  // step 3
+	cin >> InputData.itemNumber;
+	cout << "What is the item quantity?";
+	cin >> InputData.itemQuantity;
 
-	preCheck(inputData);
+	preCheck(InputData); // step 4
 
-	if (inputData.isValid == 0) // if isValid == false
+	if (InputData.isValid == 0) // if isValid == false  
 	{
 		cout << "Not Valid " << endl;
 	}
-	else // if isValid == true
+	else // if isValid == true    step 5
 	{
 		cout << "Valid " << endl;
-		cout << "What is your credit card number? " << endl;
-		cin >> inputData.cardNumber;
-		cout << "What is your user name? " << endl;
+		cout << "What is your credit card number? ";
+		cin >> InputData.CardInfo.cardNumber;
+		cout << "What is your user name? ";
 		cin.ignore();
-		getline(cin, inputData.userName); 
-		cout << "What is your credit card's expiration date? " << endl;
-		cin >> inputData.expirationDate;
-		cout << "What is your credit cards's security code? " << endl;
-		cin >> inputData.securityCode;
+		getline(cin, InputData.CardInfo.userName);
+		cout << "What is your credit card's expiration date? ";
+		cin >> InputData.CardInfo.expirationDate;
+		cout << "What is your credit cards's security code? ";
+		cin >> InputData.CardInfo.securityCode;
 
 	}
 
-	displaySalesData(inputData);
+	displaySalesData(InputData); // step 6
 	
 	return 0;
 }
