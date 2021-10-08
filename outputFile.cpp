@@ -31,23 +31,18 @@ Customers InputStruct;
 Customers selection1Input(Customers& UserStruct) // method used to allow user to input data into a structure
 {
 	cout << "Please enter your name. ";
-	cin.ignore();
 	cin.getline(UserStruct.name, NAME_SIZE);
 
 	cout << "Please enter your street address_1 ";
-	cin.ignore();
 	cin.getline(UserStruct.streetAddress_1, STREET_SIZE);
 
 	cout << "Please enter your street address_2 ";
-	cin.ignore();
 	cin.getline(UserStruct.streetAddress_2, STREET_SIZE);
-
+	
 	cout << "Please enter your city ";
-	cin.ignore();
 	cin.getline(UserStruct.city, CITY_SIZE);
 
-	cout << "Please enter your state ";
-	cin.ignore();
+	cout << "Please enter your state code / abreviation ";
 	cin.getline(UserStruct.state, STATE_CODE_SIZE);
 
 	cout << "Please enter your zip code ";
@@ -73,13 +68,17 @@ void menu() // method used to display and use menu
 {
 
 	char input = '0';
+	int count = 0;
 
 	while (input != 'x' && input != 'X')
 	{
-		cout << "~~~~~~~~~~ Menu ~~~~~~~~~~" << endl;
+		input = '0';
+		cout << endl << "~~~~~~~~~~ Menu ~~~~~~~~~~" << endl;
 		cout << "1.  Add Data " << endl;
 		cout << "X.  Exit Program ";
 		cin >> input;
+		cin.ignore();
+		
 
 		if (input != '1' && input != 'x' && input != 'X')
 		{
@@ -90,8 +89,9 @@ void menu() // method used to display and use menu
 		if (input == '1')
 		{
 			selection1Input(InputStruct);
+
 		}
-		
+		count++;
 	}
 
 
@@ -118,8 +118,8 @@ int main()
 	}
 
 	menu();
-
-	cout << InputStruct.name;
+	
+	selection1Output(InputStruct);
 
 
 	return 0;
