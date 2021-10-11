@@ -1,4 +1,4 @@
-#include<fstream>
+#include <fstream>
 #include <iomanip>  // input/ output library
 #include <string> // to use strings
 #include <iostream> // cin and cout..
@@ -15,15 +15,15 @@ const int STATE_CODE_SIZE = 3;
 
 struct Customers 
 {
-	long customerNumber;
+	long customerNumber = 0;			// this should increase by 1 for each record written
 	char name[NAME_SIZE];
 	char streetAddress_1[STREET_SIZE];
 	char streetAddress_2[STREET_SIZE];
 	char city[CITY_SIZE];
 	char state[STATE_CODE_SIZE];
 	int zipCode;
-	char isDeleted;
-	char newLine;
+	char isDeleted ='N';
+	char newLine = '\n';
 };
 
 Customers InputStruct;
@@ -64,7 +64,7 @@ void selection1Output(Customers& UserStruct) // method used to display the infor
 }
 	
 
-void menu() // method used to display and use menu
+void menu(fstream &file) // method used to display and use menu
 {
 
 	char input = '0';
@@ -89,9 +89,17 @@ void menu() // method used to display and use menu
 		if (input == '1')
 		{
 			selection1Input(InputStruct);
-
+			file.write(reinterpret_cast<char*>(&InputStruct), sizeof(InputStruct));
+			InputStruct.customerNumber += 1;
 		}
+		
 		count++;
+	}
+	if (input == 'x' || input == 'X')
+	{
+		file.close();
+		cout << "Done!" << endl;
+
 	}
 
 
@@ -103,13 +111,14 @@ int main()
 	
 	
 	
-	ofstream file("Customers.dat");
-	file.open("stuff.dat", ios::out | ios::binary); // opens file in output mode
+	fstream file("Customers.dat");
+	file.open("Customers.dat", ios::out | ios::binary); // opens file in output mode
 	cout << "Opening/ creating file if it does not already exist... " << endl;
 
-	if (file.fail() == true) // if file opened successfully
+	if (file.is_open()) // if file opened successfully
 	{
 		cout << "File opened/ created successfully " << endl;
+		menu(file);
 		
 	}
 	else // if file failed to open
@@ -117,9 +126,9 @@ int main()
 		cout << "Error opening/ creating the file " << endl;
 	}
 
-	menu();
 	
-	selection1Output(InputStruct);
+	
+	
 
 
 	return 0;
