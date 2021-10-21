@@ -4,8 +4,8 @@
 #include <iostream> // cin and cout..
 #include <cstring>
 #include <cctype>
+
 #include <cstdlib>
-#include <memory> // to use smart pointers
 using namespace std;
 
 const int NAME_SIZE = 20;
@@ -13,8 +13,6 @@ const int STREET_SIZE = 30;
 const int CITY_SIZE = 20;
 const int STATE_CODE_SIZE = 3;
 
-bool nameValidated; // to hold t/f if name was validated or not
-bool address1Validated;
 class Customer
 {
 private:
@@ -23,67 +21,148 @@ private:
 	char streetAddress_1[STREET_SIZE];
 	char streetAddress_2[STREET_SIZE];
 	char city[CITY_SIZE];
+	char stateCode[STATE_CODE_SIZE];
 	int zipCode;
 	char isDeleted = 'N';
 	char newLine = '\n';
 
 public:
 	//Customer(); // constructor
-	void setCustNum(long);
+	//void setCustNum(long);
 	bool setName(char[NAME_SIZE]);
 	bool setStreetAddress_1(char[STREET_SIZE]);
-	//void setStreetAddress_2(char[STREET_SIZE]);
-	//void setCity(char[CITY_SIZE]);
-	//void setZip(int);
+	bool setStreetAddress_2(char[STREET_SIZE]);
+	bool setCity(char[CITY_SIZE]);
+	bool setState(char[STATE_CODE_SIZE]);
+	bool setZip(int);
 
 	long getCustNum();
 	char* getName();
 	char* getStreetAddress_1();
-	//char getStreetAddress_2() const;
-	//char getCity() const;
-	//int getZip() const;
+	char* getStreetAddress_2();
+	char* getCity();
+	char* getState();
+	int getZip();
 
 };
 
 Customer customer1; // defining/ instantiation of an instance of the Customer class
 
-void Customer::setCustNum(long num)
-{
-	customerNumber = num;
-}
-
 bool Customer::setName(char n[]) // validates customer name and if it passes, it gets assigned to the name object
 {
 	int length;
+	bool validated;
+
 	length = strlen(n);
-	if (length > 0 && length < 20) // if the length of the argument matches the size parameter
+	if (length > 0 && length < NAME_SIZE) // if the length of the argument matches the size parameter
 	{
 		strcpy_s(name, n); // copies argument to name object
-		nameValidated = true;
+		validated = true;
 	}
 	else
 	{
-		nameValidated = false;
+		validated = false;
 	}
-	return nameValidated;
+	return validated;
 }
 
-bool Customer::setStreetAddress_1(char address[]) // STREET_SIZE = 30
+bool Customer::setStreetAddress_1(char add1[])
 {
 	int length;
-	length = strlen(address);
-	if (length > 0 && length < 30) // if the length of the argment matches the size parameter
+	bool validated;
+
+	length = strlen(add1);
+	if (length > 0 && length < STREET_SIZE) // if the length of the argument matches the size parameter
 	{
-		strcpy_s(streetAddress_1, address); // copies argument to streetAddress_1 object
-		address1Validated = true;
+		strcpy_s(streetAddress_1, add1); // copies argument to address 1 object
+		validated = true;
 	}
 	else
 	{
-		address1Validated = false;
+		validated = false;
 	}
+	return validated;
+}
 
+bool Customer::setStreetAddress_2(char add2[])
+{
+	int length;
+	bool validated;
 
-	return address1Validated;
+	length = strlen(add2);
+	if (length > 0 && length < STREET_SIZE) // if the length of the argument matches the size parameter
+	{
+		strcpy_s(streetAddress_2, add2); // copies argument to address 2 object
+		validated = true;
+	}
+	else
+	{
+		validated = false;
+	}
+	return validated;
+}
+
+bool Customer::setCity(char c[])
+{
+	int length;
+	bool validated;
+
+	length = strlen(c);
+	if (length > 0 && length < CITY_SIZE) // if the length of the argument matches the size parameter
+	{
+		c[0] -= 32;
+		strcpy_s(city, c); // copies argument to city object
+		validated = true;
+	}
+	else
+	{
+		
+		validated = false;
+	}
+	return validated;
+}
+
+bool Customer::setState(char state[])
+{
+	int length;
+	bool validated;
+
+	length = strlen(state);
+	if (length > 0 && length < STATE_CODE_SIZE) // if the length of the argument matches the size parameter
+	{
+		state[0] -= 32;
+		state[1] -= 32;
+		strcpy_s(stateCode, state); // copies argument to city object
+		validated = true;
+	}
+	else
+	{
+		
+		validated = false;
+	}
+	
+	return validated;
+}
+
+bool Customer::setZip(int zip)
+{
+	bool validated;
+	if (zip > 0 && zip < 99999) // if the length of the argument matches the size parameter
+	{
+		zipCode = zip; // copies argument to zipCode object
+		validated = true;
+	}
+	else
+	{
+		validated = false;
+	}
+	return validated;
+}
+
+char* Customer::getName()
+{
+
+	return name;
 }
 
 long Customer::getCustNum()
@@ -91,62 +170,176 @@ long Customer::getCustNum()
 	return customerNumber;
 }
 
-char* Customer::getName()
-{
-	
-	return name;
-}
-
 char* Customer::getStreetAddress_1()
 {
 	return streetAddress_1;
 }
 
+char* Customer::getStreetAddress_2()
+{
+	return streetAddress_2;
+}
+
+char* Customer::getCity()
+{
+	return city;
+}
+
+int Customer::getZip()
+{
+	return zipCode;
+}
+
+char* Customer::getState()
+{
+	return stateCode;
+}
+
+
 int main()
 {
-	long custNum;								//~~~~~~~~ begin getting customer number
-	cout << "Please enter the customer number ";
-	cin >> custNum;
-	customer1.setCustNum(custNum);
-	cout << "Customer number is " << customer1.getCustNum() << endl; // ~~~ end getting customer number
+	bool isOK;
+	char yourName[35];
+	char add1[45];
+	char add2[45];
+	char city[30];
+	char st[5];
+	int zip;
+
+	cout << "Customer Number : " << customer1.getCustNum() << endl;
+
+	// ~~~~~~~ begin getting customer name					
+
+	int count = 0;
+	do
+	{
+		cout << "Enter the customer's name (must be less than 20 characters) ";
+		if (count > 0) // does not ignore/ clear the for the first attempt
+		{
+
+			cin.clear(); // resets the error flag if a newline was not found
+			cin.ignore(256, '\n'); // clears out the next 256 chars up to a newline
+
+		}
+		cin.getline(yourName, 35);
+		isOK = customer1.setName(yourName);
+		count++;
+	} while (isOK == false);
+
+
+	cout << "Customer name : " << customer1.getName() << endl;
+
+	// ~~~~~~~ end getting customer name
+
+	// ~~~~~~~ begin getting street address 1					
+
+	count = 0;
+	do
+	{
+		cout << "Enter the customer's address 1 (must be less than 30 characters) ";
+		if (count > 0) // does not ignore/ clear the for the first attempt
+		{
+			cin.clear(); // resets the error flag if a newline was not found
+			cin.ignore(256, '\n'); // clears out the next 256 chars up to a newline
+
+		}
+		cin.getline(add1, 45);
+		isOK = customer1.setStreetAddress_1(add1);
+		count++;
+	} while (isOK == false);
+
+
+	cout << "Customer address 1 : " << customer1.getStreetAddress_1() << endl;
+
+	// ~~~~~~~ end getting street address 1
+
+	// ~~~~~~~ begin getting street address 2					
+
+	count = 0;
+	do
+	{
+		cout << "Enter the customer's address 2 (must be less than 30 characters) ";
+		if (count > 0) // does not ignore/ clear the for the first attempt
+		{
+			cin.clear(); // resets the error flag if a newline was not found
+			cin.ignore(256, '\n'); // clears out the next 256 chars up to a newline
+
+		}
+		cin.getline(add2, 45);
+		isOK = customer1.setStreetAddress_2(add2);
+		count++;
+	} while (isOK == false);
+
+
+	cout << "Customer address 2 : " << customer1.getStreetAddress_2() << endl;
+
+	// ~~~~~~~ end getting street address 2
+
+	// ~~~~~~~ begin getting city					
+
+	count = 0;
+	do
+	{
+		cout << "Enter the customer's city (must be less than 20 characters) ";
+		if (count > 0) // does not ignore/ clear the for the first attempt
+		{
+			cin.clear(); // resets the error flag if a newline was not found
+			cin.ignore(256, '\n'); // clears out the next 256 chars up to a newline
+
+		}
+		cin.getline(city, 45);
+		isOK = customer1.setCity(city);
+		count++;
+	} while (isOK == false);
+
 	
-	char yourName[25];							// ~~~~~~~ begin getting customer name					
-	cout << "Enter the customer's name ";
-	cin.ignore();
-	cin.getline(yourName, 25);
-	customer1.setName(yourName);
+	cout << "Customer city : " << customer1.getCity() << endl;
 
-	while (nameValidated == false)
-	{
-		cout << "***ERROR***" << endl;
-		cout << "Enter the customer's name ";
-		cin.getline(yourName, NAME_SIZE);
-		customer1.setName(yourName);
-	}
-	if (nameValidated == true)
-	{
-		customer1.setName(yourName);
-		cout << "Customer name is " << customer1.getName() << endl;
-	}											// ~~~~~~~~~~ end getting customer name
+	// ~~~~~~~ end getting street city
 
-	char address1[35];							// ~~~~~~~ begin getting streetAddress_1					
-	cout << "Enter the customer's address 1 ";
-	cin.ignore();
-	cin.getline(address1, 25);
-	customer1.setStreetAddress_1(address1);
+	// ~~~~~~~ begin getting state					
 
-	while (address1Validated == false)
+	count = 0;
+	do
 	{
-		cout << "***ERROR***" << endl;
-		cout << "Enter the customer's address 1 ";
-		cin.getline(address1, STREET_SIZE);
-		customer1.setStreetAddress_1(address1);
-	}
-	if (address1Validated == true)
+		cout << "Enter the customer's state code (must be 2 characters) ";
+		if (count > 0) // does not ignore/ clear the for the first attempt
+		{
+			cin.clear(); // resets the error flag if a newline was not found
+			cin.ignore(256, '\n'); // clears out the next 256 chars up to a newline
+
+		}
+		cin.getline(st , 45);
+		isOK = customer1.setState(st);
+		count++;
+	} while (isOK == false);
+
+
+	cout << "Customer state : " << customer1.getState() << endl;
+
+	// ~~~~~~~ end getting street state
+
+	// ~~~~~~~ begin getting zip code				
+
+	count = 0;
+	do
 	{
-		customer1.setStreetAddress_1(address1);
-		cout << "Customer address 1 is " << customer1.getStreetAddress_1() << endl;
-	}											// ~~~~~~~~~~ end getting streetAddress_1
-	
+		cout << "Enter the customer's zip code (must be between 0 and 99999) ";
+		if (count > 0) // does not ignore/ clear the for the first attempt
+		{
+			cin.clear(); // resets the error flag if a newline was not found
+			cin.ignore(256, '\n'); // clears out the next 256 chars up to a newline
+
+		}
+		cin >> zip;
+		isOK = customer1.setZip(zip);
+		count++;
+	} while (isOK == false);
+
+
+	cout << "Customer zip code : " << customer1.getZip() << endl;
+
+	// ~~~~~~~ end getting zip code
+
 	return 0;
 }
