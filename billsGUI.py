@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 import tkinter.simpledialog
 import breezypythongui
 
@@ -10,10 +11,14 @@ root.title('Bills Data')
 root.geometry('300x300')
 
 # buttons
-#enterBillsButton = Button(root, text = "Enter Bills", fg = 'blue')
-#enterBillsButton.grid(column = 1, row = 0, columnspan = 1)
+saveToFileButton = Button(root, text = "Save to file", fg = 'blue')
+saveToFileButton.grid(column = 1, row = 11, columnspan = 1)
 
+calculateTotalButton = Button(root, text = "Calculate Total", fg = 'blue')
+calculateTotalButton.grid(column = 0, row = 11, columnspan = 1)
 
+whoOwesWhoButton = Button(root, text = " Who Owes Who?", fg = 'blue')
+whoOwesWhoButton.grid(column = 3, row = 11, columnspan = 1)
 
 #Entry field labels
 electricityBillLabel = Label(root, text = "Electricity Amount", fg = 'blue', font = ("Helvetica", 12))
